@@ -1,0 +1,5 @@
+flask = "*"
+flask-sqlalchemy = "*"
+psycopg2 = "*"
+flask-cors = "*"
+flask_swagger_ui = "*"
