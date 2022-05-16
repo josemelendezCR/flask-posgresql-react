@@ -45,7 +45,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/components/schemas/id"
+              "$ref": "#/components/schemas/role"
             }
           },
           "400": {
