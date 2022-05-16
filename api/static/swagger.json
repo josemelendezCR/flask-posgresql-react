@@ -1,0 +1,115 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "Application made using Flask and PostgreSQL",
+    "version": "1.0.0",
+    "title": "Team Role Management APP",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Role Request",
+      "description": "Example API for requesting and return roles by team"
+    }
+  ],
+  "paths": {
+    "/api/roles/new": {
+      "post": {
+        "tags": [
+          "Role Request"
+        ],
+        "summary": "Create a new role by team",
+        "requestBody": {
+          "description": "Role request Post Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/role"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/id"
+            }
+          },
+          "400": {
+            "description": "Failed. Invalid data."
+          }
+        }
+      }
+    },
+    "/api/roles/{team}": {
+      "parameters": [
+        {
+          "name": "team",
+          "in": "path",
+          "required": true,
+          "description": "Roles will be filter by the team name searched",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Role Request"
+        ],
+        "summary": "Get roles by the given team",
+        "parameters": [
+          {
+            "name": "team",
+            "in": "path",
+            "required": true,
+            "description": "Roles will be filter by the team name searched",
+            "schema": {
+              "$ref": "#/components/schemas/role"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/role"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "role": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "format": "number"
+          },
+          "team": {
+            "type": "string",
+            "format": "string"
+          },
+          "role": {
+            "type": "string",
+            "format": "string"
+          }
+        }
+      }
+    }
+  }
+}
