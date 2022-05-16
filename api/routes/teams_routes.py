@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, abort
 from models.role_model import Role
 from utils.db import db
 from utils.format_roles import format_role, format_role_list
@@ -13,7 +13,7 @@ def add_role():
     team = clean_string(request.json['team'])
     role = clean_string(request.json['role'])
     if(team == '' or role == ''):
-      return { "error": "Please enter valid data" }
+      abort(400)
 
     new_role = Role(team, role)
 
@@ -21,7 +21,7 @@ def add_role():
     # The following filter is equals to Select * from role where team=team AND role=role
     already_exists = db.session.query(Role).filter(Role.team == team, Role.role == role).count() > 0
     if(already_exists):
-      return { "error": "The role has been already added for the selected team" }
+      abort(400)
     else:   
       db.session.add(new_role)
       db.session.commit()

@@ -1,9 +1,11 @@
 from flask import Flask
+from flask_cors import CORS
 from routes.teams_routes import router
 from utils.db import db
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+CORS(app)
 
 # Development env database URI
 app.config["SQLALCHEMY_DATABASE_URI"] = 'postgresql://postgres:password@localhost:5001/react-flask-posgresql'
